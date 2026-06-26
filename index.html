@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex Global | Investment Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">Forex <span>Global</span></div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#plans">Plans</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons" id="authSection">
+                <button class="btn-login" style="background:transparent; border:none; color:white; margin-right:15px; cursor:pointer;" onclick="openModal('loginModal')">Login</button>
+                <button class="btn-register" style="background: linear-gradient(45deg, #0d6efd, #00f2fe); color: #fff; padding: 8px 20px; border-radius: 20px; border:none; font-weight: bold; cursor:pointer;" onclick="openModal('registerModal')">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h5>WELCOME TO FOREX GLOBAL</h5>
+            <h1>A Profitable Platform For High-Margin Investment</h1>
+            <p>We work on making money from the volatility of cryptocurrencies and forex trading, offering great and secure returns to our global clients.</p>
+            <div class="hero-btns">
+                <a href="#plans" class="btn-primary">Learn More</a>
+                <a href="https://wa.me/8801700000000" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Chat On WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container stats-grid">
+            <div class="stat-box">
+                <i class="fas fa-users"></i>
+                <h3>5,100,000+</h3>
+                <p>All Members</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-wallet"></i>
+                <h3>$49,800</h3>
+                <p>Average Investment</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-globe"></i>
+                <h3>75+</h3>
+                <p>Countries Supported</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container about-grid">
+            <div class="about-text">
+                <h2>About Forex Global</h2>
+                <p>Forex Global is an investment company whose team is working on making money from the volatility of cryptocurrencies and forex markets. Our system ensures highly secure investments and automated daily profit returns.</p>
+                <div class="about-features">
+                    <p><i class="fas fa-shield-alt"></i> Secure & Reliable Infrastructure</p>
+                    <p><i class="fas fa-lock"></i> Guaranteed Protection of Capital</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="plans" class="plans">
+        <div class="container">
+            <div class="section-title">
+                <h2>Investment Plans</h2>
+                <p>Choose the investment plan that fits your strategy</p>
+            </div>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <h3>Global Trade Starter</h3>
+                    <div class="price">$100</div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 1% Every Day (Mon - Fri)</li>
+                        <li><i class="fas fa-check"></i> Capital Return: Yes</li>
+                        <li><i class="fas fa-check"></i> Total 200% Return + Capital</li>
+                    </ul>
+                    <button class="btn-card" style="width:100%; cursor:pointer;" onclick="investPlan('Starter', 100)">Invest Now</button>
+                </div>
+                <div class="plan-card premium">
+                    <div class="badge">Popular</div>
+                    <h3>Global Trade Pro</h3>
+                    <div class="price">$500</div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 1.5% Every Day (Mon - Fri)</li>
+                        <li><i class="fas fa-check"></i> Capital Return: Yes</li>
+                        <li><i class="fas fa-check"></i> Total 200% Return + Capital</li>
+                    </ul>
+                    <button class="btn-card" style="width:100%; cursor:pointer;" onclick="investPlan('Pro', 500)">Invest Now</button>
+                </div>
+                <div class="plan-card">
+                    <h3>Global Agent</h3>
+                    <div class="price">$2000</div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 2% Every Day (Mon - Fri)</li>
+                        <li><i class="fas fa-check"></i> Capital Return: Yes</li>
+                        <li><i class="fas fa-check"></i> Total 200% Return + Capital</li>
+                    </ul>
+                    <button class="btn-card" style="width:100%; cursor:pointer;" onclick="investPlan('Agent', 2000)">Invest Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2 style="margin-bottom:20px; color:#00f2fe;">Login to Account</h2>
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email Address" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #0d6efd; background: #0b132b; color: white;">
+                <input type="password" id="loginPassword" placeholder="Password" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #0d6efd; background: #0b132b; color: white;">
+                <button type="submit" class="btn-primary" style="padding: 10px 25px; border-radius: 20px; border:none; font-weight:bold; cursor:pointer; background: linear-gradient(45deg, #0d6efd, #00f2fe); color:white; margin-top:10px;">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2 style="margin-bottom:20px; color:#00f2fe;">Create New Account</h2>
+            <form id="registerForm">
+                <input type="text" id="regName" placeholder="Full Name" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #0d6efd; background: #0b132b; color: white;">
+                <input type="email" id="regEmail" placeholder="Email Address" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #0d6efd; background: #0b132b; color: white;">
+                <input type="password" id="regPassword" placeholder="Password (Min 6 characters)" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #0d6efd; background: #0b132b; color: white;">
+                <button type="submit" class="btn-primary" style="padding: 10px 25px; border-radius: 20px; border:none; font-weight:bold; cursor:pointer; background: linear-gradient(45deg, #0d6efd, #00f2fe); color:white; margin-top:10px;">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <div class="container footer-content">
+            <div class="footer-about">
+                <h3>Forex Global</h3>
+                <p>A full service investment platform providing reliable profits since inception.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Useful Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#plans">Plan</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> +44-20-4526-2356</p>
+                <p><i class="fas fa-envelope"></i> support@forexglobal.biz</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2026 Forex Global. All Rights Reserved. Created by Pavel.</p>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // আপনার প্রোজেক্টের আসল ফায়ারবেস কনফিগারেশন কোড
+        const firebaseConfig = {
+            apiKey: "AIzaSyBKgUEN3eCEQIm07JejOr4kM0yOBEGGdR8",
+            authDomain: "forexglobal-95dfc.firebaseapp.com",
+            projectId: "forexglobal-95dfc",
+            storageBucket: "forexglobal-95dfc.firebasestorage.app",
+            messagingSenderId: "87470977908",
+            appId: "1:87470977908:web:4b7f316b372327ffa87221"
+        };
+        
+        // ফায়ারবেস ইনিশিয়ালাইজ করা
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // মোডাল পপ-আপ ওপেন/ক্লোজ করার ফাংশন
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+
+        // ১. অ্যাকাউন্ট রেজিস্ট্রেশন হ্যান্ডলার
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    // ফায়ারস্টোর ডাটাবেজে ইউজারের প্রাথমিক তথ্য সেভ করা
+                    return db.collection("users").doc(user.uid).set({
+                        fullName: name,
+                        email: email,
+                        balance: 0,
+                        plan: "None",
+                        uid: user.uid
+                    });
+                })
+                .then(() => {
+                    alert("Account Created Successfully!");
+                    closeModal('registerModal');
+                })
+                .catch((error) => { alert("Error: " + error.message); });
+        });
+
+        // ২. ইউজার লগইন হ্যান্ডলার
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    alert("Logged In Successfully!");
+                    closeModal('loginModal');
+                })
+                .catch((error) => { alert("Error: " + error.message); });
+        });
+
+        // ৩. রিয়েল-টাইম ইউজার সেশন ও ব্যালেন্স চেক (Auth State Listener)
+        auth.onAuthStateChanged((user) => {
+            const authSection = document.getElementById('authSection');
+            if (user) {
+                // ইউজার লগইন থাকলে ডাটাবেজ থেকে তার ব্যালেন্স ও নাম নিয়ে আসা
+                db.collection("users").doc(user.uid).onSnapshot((doc) => {
+                    if (doc.exists) {
+                        const userData = doc.data();
+                        authSection.innerHTML = `
+                            <span style="margin-right:15px; color:#00f2fe; font-weight:bold;">Hi, ${userData.fullName} ($${userData.balance})</span>
+                            <button class="btn-login" style="background:transparent; border:1px solid #ff4d4d; color:#ff4d4d; padding:5px 15px; border-radius:15px; cursor:pointer; font-weight:bold;" onclick="auth.signOut()">Logout</button>
+                        `;
+                    }
+                });
+            } else {
+                // ইউজার লগআউট থাকলে সাধারণ লগইন/রেজিস্টার বাটন দেখানো
+                authSection.innerHTML = `
+                    <button class="btn-login" style="background:transparent; border:none; color:white; margin-right:15px; cursor:pointer;" onclick="openModal('loginModal')">Login</button>
+                    <button class="btn-register" style="background: linear-gradient(45deg, #0d6efd, #00f2fe); color: #fff; padding: 8px 20px; border-radius: 20px; border:none; font-weight: bold; cursor:pointer;" onclick="openModal('registerModal')">Register</button>
+                `;
+            }
+        });
+
+        // ৪. ইনভেস্ট বাটনে ক্লিক করার লজিক
+        function investPlan(planName, price) {
+            const user = auth.currentUser;
+            if (!user) {
+                alert("Please Login First to Invest!");
+                openModal('loginModal');
+            } else {
+                alert(`You selected ${planName} Plan ($${price}). Admin will verify your payment request!`);
+            }
+        }
+    </script>
+</body>
+</html>
