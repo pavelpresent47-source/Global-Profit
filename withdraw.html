@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Withdraw | Forex Global</title>
+    <style>
+        body { background: #0b132b; color: white; font-family: sans-serif; padding: 20px; }
+        .box { background: #1c2541; padding: 20px; border-radius: 15px; max-width: 400px; margin: auto; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #ff4757; color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h3>Withdraw Request</h3>
+        <input type="number" id="wAmount" placeholder="Amount to Withdraw">
+        <input type="text" id="wNumber" placeholder="bKash/Nagad Number">
+        <button onclick="requestWithdraw()">Submit Request</button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
+    <script>
+        const firebaseConfig = { /* আপনার আগের কোড থেকে কনফিগারেশন এখানে বসান */ };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        async function requestWithdraw() {
+            const amount = parseFloat(document.getElementById('wAmount').value);
+            const number = document.getElementById('wNumber').value;
+            const user = auth.currentUser;
+
+            if(!user) { alert("Please login first!"); return; }
+            
+            await db.collection("withdraw_requests").add({
+                uid: user.uid,
+                email: user.email,
+                amount: amount,
+                number: number,
+                status: "pending",
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            alert("Withdraw request sent successfully!");
+        }
+    </script>
+</body>
+</html>
