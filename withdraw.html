@@ -8,18 +8,27 @@
         body { background: #0b132b; color: white; font-family: sans-serif; padding: 20px; display: flex; justify-content: center; }
         .withdraw-card { background: #1c2541; padding: 25px; border-radius: 15px; width: 100%; max-width: 400px; border: 1px solid #00f2fe; }
         .balance-info { text-align: center; font-size: 1.2rem; margin-bottom: 20px; color: #00f2fe; font-weight: bold; }
+        .method-btn { padding: 10px; margin: 5px; border: 1px solid #3a506b; background: #0b132b; color: white; cursor: pointer; border-radius: 5px; }
+        .method-btn.active { border-color: #00f2fe; background: #0d6efd; }
         input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #3a506b; background: #0b132b; color: white; box-sizing: border-box; }
-        button { width: 100%; padding: 14px; background: linear-gradient(45deg, #ff416c, #ff4b2b); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 1rem; }
+        button.submit-btn { width: 100%; padding: 14px; background: linear-gradient(45deg, #0d6efd, #00f2fe); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="withdraw-card">
     <div class="balance-info" id="userBalance">Loading Balance...</div>
-    <h3 style="text-align:center;">Withdraw Request</h3>
+    
+    <label>Select Payment Method:</label>
+    <div style="display:flex; justify-content:center; margin: 10px 0;">
+        <button class="method-btn" onclick="setMethod('bKash', this)">bKash</button>
+        <button class="method-btn" onclick="setMethod('Nagad', this)">Nagad</button>
+        <button class="method-btn" onclick="setMethod('Rocket', this)">Rocket</button>
+    </div>
+
     <input type="number" id="wAmount" placeholder="Amount to Withdraw">
-    <input type="text" id="wNumber" placeholder="bKash/Nagad Number">
-    <button onclick="requestWithdraw()">Submit Withdraw Request</button>
+    <input type="text" id="wNumber" placeholder="Enter your number">
+    <button class="submit-btn" onclick="requestWithdraw()">Submit Withdraw Request</button>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
@@ -27,55 +36,44 @@
 <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
 
 <script>
-    const firebaseConfig = {
-        apiKey: "AIzaSyBKgUEN3eCEQIm07JejOr4kM0yOBEGGdR8",
-        authDomain: "forexglobal-95dfc.firebaseapp.com",
-        projectId: "forexglobal-95dfc",
-        storageBucket: "forexglobal-95dfc.firebasestorage.app",
-        messagingSenderId: "87470977908",
-        appId: "1:87470977908:web:4b7f316b372327ffa87221"
-    };
-    
+    const firebaseConfig = { /* আপনার কনফিগারেশন বসান */ };
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // ব্যালেন্স রিয়েল-টাইমে দেখানো
+    let selectedMethod = "";
+
+    function setMethod(method, btn) {
+        selectedMethod = method;
+        document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
     auth.onAuthStateChanged((user) => {
         if (user) {
             db.collection("users").doc(user.uid).onSnapshot((doc) => {
-                if (doc.exists) {
-                    document.getElementById('userBalance').innerText = "Balance: Tk." + (doc.data().balance || 0);
-                }
+                if (doc.exists) document.getElementById('userBalance').innerText = "Balance: Tk." + (doc.data().balance || 0);
             });
         }
     });
 
-    // উইথড্র রিকোয়েস্ট সাবমিট
     async function requestWithdraw() {
+        if (!selectedMethod) { alert("Please select a payment method!"); return; }
         const amount = parseFloat(document.getElementById('wAmount').value);
         const number = document.getElementById('wNumber').value;
         const user = auth.currentUser;
 
         if(!amount || !number) { alert("Please fill all fields"); return; }
         
-        const userRef = db.collection("users").doc(user.uid);
-        const userDoc = await userRef.get();
-        
-        if (userDoc.data().balance < amount) {
-            alert("Insufficient Balance!");
-            return;
-        }
-
         await db.collection("withdraw_requests").add({
             uid: user.uid,
-            email: user.email,
+            method: selectedMethod,
             amount: amount,
             number: number,
             status: "pending",
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
-        alert("Withdraw request sent! Admin will process it soon.");
+        alert("Withdraw request sent via " + selectedMethod);
     }
 </script>
 </body>
