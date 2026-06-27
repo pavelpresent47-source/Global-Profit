@@ -2,48 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Withdraw | Forex Global</title>
     <style>
-        body { background: #0b132b; color: white; font-family: sans-serif; padding: 20px; }
-        .box { background: #1c2541; padding: 20px; border-radius: 15px; max-width: 400px; margin: auto; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #ff4757; color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 5px; }
+        body { background: #0b132b; color: white; font-family: sans-serif; padding: 20px; display: flex; justify-content: center; }
+        .withdraw-card { background: #1c2541; padding: 25px; border-radius: 15px; width: 100%; max-width: 400px; border: 1px solid #00f2fe; }
+        .balance-info { text-align: center; font-size: 1.2rem; margin-bottom: 20px; color: #00f2fe; font-weight: bold; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #3a506b; background: #0b132b; color: white; box-sizing: border-box; }
+        button { width: 100%; padding: 14px; background: linear-gradient(45deg, #ff416c, #ff4b2b); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 1rem; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h3>Withdraw Request</h3>
-        <input type="number" id="wAmount" placeholder="Amount to Withdraw">
-        <input type="text" id="wNumber" placeholder="bKash/Nagad Number">
-        <button onclick="requestWithdraw()">Submit Request</button>
-    </div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
-    <script>
-        const firebaseConfig = { /* আপনার আগের কোড থেকে কনফিগারেশন এখানে বসান */ };
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
+<div class="withdraw-card">
+    <div class="balance-info" id="userBalance">Loading Balance...</div>
+    <h3 style="text-align:center;">Withdraw Request</h3>
+    <input type="number" id="wAmount" placeholder="Amount to Withdraw">
+    <input type="text" id="wNumber" placeholder="bKash/Nagad Number">
+    <button onclick="requestWithdraw()">Submit Withdraw Request</button>
+</div>
 
-        async function requestWithdraw() {
-            const amount = parseFloat(document.getElementById('wAmount').value);
-            const number = document.getElementById('wNumber').value;
-            const user = auth.currentUser;
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
 
-            if(!user) { alert("Please login first!"); return; }
-            
-            await db.collection("withdraw_requests").add({
-                uid: user.uid,
-                email: user.email,
-                amount: amount,
-                number: number,
-                status: "pending",
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBKgUEN3eCEQIm07JejOr4kM0yOBEGGdR8",
+        authDomain: "forexglobal-95dfc.firebaseapp.com",
+        projectId: "forexglobal-95dfc",
+        storageBucket: "forexglobal-95dfc.firebasestorage.app",
+        messagingSenderId: "87470977908",
+        appId: "1:87470977908:web:4b7f316b372327ffa87221"
+    };
+    
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // ব্যালেন্স রিয়েল-টাইমে দেখানো
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            db.collection("users").doc(user.uid).onSnapshot((doc) => {
+                if (doc.exists) {
+                    document.getElementById('userBalance').innerText = "Balance: Tk." + (doc.data().balance || 0);
+                }
             });
-            alert("Withdraw request sent successfully!");
         }
-    </script>
+    });
+
+    // উইথড্র রিকোয়েস্ট সাবমিট
+    async function requestWithdraw() {
+        const amount = parseFloat(document.getElementById('wAmount').value);
+        const number = document.getElementById('wNumber').value;
+        const user = auth.currentUser;
+
+        if(!amount || !number) { alert("Please fill all fields"); return; }
+        
+        const userRef = db.collection("users").doc(user.uid);
+        const userDoc = await userRef.get();
+        
+        if (userDoc.data().balance < amount) {
+            alert("Insufficient Balance!");
+            return;
+        }
+
+        await db.collection("withdraw_requests").add({
+            uid: user.uid,
+            email: user.email,
+            amount: amount,
+            number: number,
+            status: "pending",
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        alert("Withdraw request sent! Admin will process it soon.");
+    }
+</script>
 </body>
 </html>
