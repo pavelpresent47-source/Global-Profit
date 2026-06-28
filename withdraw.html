@@ -3,43 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Withdraw | Forex Global</title>
+    <title>Withdraw - Global Profit</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background: #0b132b; color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .withdraw-card { background: #1c2541; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; border: 1px solid #00f2fe; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .balance-info { text-align: center; font-size: 1.5rem; margin-bottom: 25px; color: #00f2fe; font-weight: bold; text-shadow: 0 0 10px rgba(0,242,254,0.3); }
-        .method-container { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 20px; }
-        .method-btn { flex: 1; padding: 12px 5px; border: 2px solid #3a506b; background: #0b132b; color: white; cursor: pointer; border-radius: 10px; font-weight: bold; transition: 0.3s; }
-        
-        /* কালার সিলেকশন লজিক */
-        .method-btn.active.bKash { background-color: #e91e63 !important; border-color: #e91e63 !important; }
-        .method-btn.active.Nagad { background-color: #f44336 !important; border-color: #f44336 !important; }
-        .method-btn.active.Rocket { background-color: #9c27b0 !important; border-color: #9c27b0 !important; }
+        /* Withdraw Page Specific Styles */
+        .withdraw-page {
+            background: var(--bg-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-        input { width: 100%; padding: 15px; margin: 10px 0; border-radius: 10px; border: 1px solid #3a506b; background: #0b132b; color: white; box-sizing: border-box; font-size: 1rem; }
-        .submit-btn { width: 100%; padding: 15px; background: linear-gradient(45deg, #0d6efd, #00f2fe); border: none; color: white; font-weight: bold; border-radius: 10px; cursor: pointer; font-size: 1.1rem; margin-top: 10px; transition: 0.3s; }
-        .submit-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+        .withdraw-card {
+            background: var(--bg-light-dark);
+            padding: 35px 30px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 40px rgba(0, 242, 254, 0.05);
+            animation: slideDown 0.5s ease;
+        }
+
+        .withdraw-card .logo {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .withdraw-card .logo span {
+            color: var(--accent-color);
+        }
+
+        .withdraw-card .sub-title {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .balance-info {
+            text-align: center;
+            padding: 15px;
+            background: rgba(46, 213, 115, 0.08);
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(46, 213, 115, 0.15);
+        }
+
+        .balance-info .label {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .balance-info .amount {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--success-green);
+        }
+
+        .balance-info .amount i {
+            margin-right: 5px;
+        }
+
+        .balance-breakdown {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background: rgba(11, 19, 43, 0.5);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .balance-breakdown .item {
+            text-align: center;
+        }
+
+        .balance-breakdown .item .val {
+            font-weight: 600;
+            color: var(--text-white);
+        }
+
+        .balance-breakdown .item .lbl {
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+
+        .balance-breakdown .item .val.main { color: var(--primary-blue); }
+        .balance-breakdown .item .val.earn { color: var(--accent-color); }
+
+        .method-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .method-btn {
+            padding: 14px 8px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(11, 19, 43, 0.6);
+            color: var(--text-white);
+            cursor: pointer;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .method-btn i {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .method-btn:hover {
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        .method-btn.active {
+            border-color: var(--accent-color);
+            background: rgba(0, 242, 254, 0.08);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.05);
+        }
+
+        .method-btn.active.bKash { border-color: #E2136E; background: rgba(226, 19, 110, 0.1); }
+        .method-btn.active.bKash i { color: #E2136E; }
+        
+        .method-btn.active.Nagad { border-color: #FF6B00; background: rgba(255, 107, 0, 0.1); }
+        .method-btn.active.Nagad i { color: #FF6B00; }
+        
+        .method-btn.active.Rocket { border-color: #7C4DFF; background: rgba(124, 77, 255, 0.1); }
+        .method-btn.active.Rocket i { color: #7C4DFF; }
+
+        .withdraw-card input {
+            width: 100%;
+            padding: 14px 16px;
+            margin: 8px 0;
+            border-radius: 10px;
+            border: 2px solid rgba(13, 110, 253, 0.15);
+            background: rgba(11, 19, 43, 0.8);
+            color: var(--text-white);
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        .withdraw-card input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.05);
+        }
+
+        .withdraw-card input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-group {
+            margin: 10px 0;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .input-group label i {
+            margin-right: 6px;
+            color: var(--accent-color);
+        }
+
+        .withdraw-note {
+            background: rgba(255, 165, 2, 0.08);
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 3px solid var(--warning-yellow);
+        }
+
+        .withdraw-note p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .withdraw-note i {
+            color: var(--warning-yellow);
+            margin-right: 8px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-color));
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 25px rgba(0, 242, 254, 0.2);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-back {
+            background: transparent;
+            color: var(--text-muted);
+            padding: 10px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-back:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .status-message {
+            padding: 12px;
+            border-radius: 10px;
+            margin: 10px 0;
+            display: none;
+            font-size: 14px;
+        }
+
+        .status-message.success {
+            display: block;
+            background: rgba(46, 213, 115, 0.12);
+            border: 1px solid var(--success-green);
+            color: var(--success-green);
+        }
+
+        .status-message.error {
+            display: block;
+            background: rgba(255, 71, 87, 0.12);
+            border: 1px solid var(--danger-red);
+            color: var(--danger-red);
+        }
+
+        .status-message.info {
+            display: block;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .min-amount-hint {
+            text-align: right;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Toast */
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success-green);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 5px 20px rgba(46, 213, 115, 0.3);
+            z-index: 9999;
+            animation: slideUp 0.3s ease;
+            display: none;
+        }
+
+        #toast.show {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateX(-50%) translateY(50px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .withdraw-card {
+                padding: 25px 18px;
+            }
+
+            .balance-info .amount {
+                font-size: 22px;
+            }
+
+            .method-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .method-btn {
+                padding: 10px 5px;
+                font-size: 12px;
+            }
+
+            .method-btn i {
+                font-size: 20px;
+            }
+
+            .balance-breakdown {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="withdraw-card">
-    <div class="balance-info" id="userBalance">Loading...</div>
-    <div class="method-container">
-        <button class="method-btn bKash" onclick="setMethod('bKash', this)">bKash</button>
-        <button class="method-btn Nagad" onclick="setMethod('Nagad', this)">Nagad</button>
-        <button class="method-btn Rocket" onclick="setMethod('Rocket', this)">Rocket</button>
-    </div>
-    <input type="number" id="wAmount" placeholder="Amount to Withdraw">
-    <input type="text" id="wNumber" placeholder="Enter your number">
-    <button class="submit-btn" onclick="requestWithdraw()">Submit Request</button>
+<!-- Toast -->
+<div id="toast">
+    <i class="fas fa-check-circle"></i> <span id="toastMessage">Copied!</span>
 </div>
 
+<div class="withdraw-page">
+    <div class="withdraw-card">
+        <!-- Logo -->
+        <div class="logo">Global <span>Profit</span></div>
+        <div class="sub-title">Secure Withdrawal System</div>
+
+        <!-- Balance Info -->
+        <div class="balance-info">
+            <span class="label"><i class="fas fa-wallet"></i> Available Balance</span>
+            <div class="amount" id="userBalance">৳0</div>
+        </div>
+
+        <!-- Balance Breakdown -->
+        <div class="balance-breakdown">
+            <div class="item">
+                <div class="val main" id="mainBalance">৳0</div>
+                <div class="lbl">Main Balance</div>
+            </div>
+            <div class="item">
+                <div class="val earn" id="earnBalance">৳0</div>
+                <div class="lbl">Earn Balance</div>
+            </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="method-container">
+            <button class="method-btn bKash" onclick="setMethod('bKash', this)">
+                <i class="fas fa-mobile-alt"></i>
+                bKash
+            </button>
+            <button class="method-btn Nagad" onclick="setMethod('Nagad', this)">
+                <i class="fas fa-mobile-alt"></i>
+                Nagad
+            </button>
+            <button class="method-btn Rocket" onclick="setMethod('Rocket', this)">
+                <i class="fas fa-rocket"></i>
+                Rocket
+            </button>
+        </div>
+
+        <!-- Status Message -->
+        <div id="statusMessage" class="status-message"></div>
+
+        <!-- Withdraw Form -->
+        <form id="withdrawForm">
+            <div class="input-group">
+                <label for="wAmount"><i class="fas fa-money-bill-wave"></i> Withdraw Amount</label>
+                <input type="number" id="wAmount" placeholder="Enter amount (Min 500)" min="500" required>
+                <div class="min-amount-hint">Minimum withdrawal: ৳500</div>
+            </div>
+
+            <div class="input-group">
+                <label for="wNumber"><i class="fas fa-phone"></i> Your Account Number</label>
+                <input type="tel" id="wNumber" placeholder="01XXXXXXXXX" required>
+            </div>
+
+            <div class="withdraw-note">
+                <p><i class="fas fa-info-circle"></i> Withdrawal requests are processed within 24-48 hours after admin approval.</p>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <i class="fas fa-check-circle"></i> Request Withdrawal
+            </button>
+        </form>
+
+        <a href="dashboard.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+</div>
+
+<!-- Firebase Scripts -->
 <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
 
 <script>
+    // Firebase Config
     const firebaseConfig = {
         apiKey: "AIzaSyBKgUEN3eCEQIm07JejOr4kM0yOBEGGdR8",
         authDomain: "forexglobal-95dfc.firebaseapp.com",
@@ -53,46 +460,212 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    let selectedMethod = "";
+    let selectedMethod = '';
+    let currentUser = null;
+    let userData = null;
 
+    // ==========================================
+    // TOAST NOTIFICATION
+    // ==========================================
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        toastMessage.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
+    }
+
+    // ==========================================
+    // SHOW STATUS MESSAGE
+    // ==========================================
+    function showStatus(message, type = 'success') {
+        const statusDiv = document.getElementById('statusMessage');
+        statusDiv.className = `status-message ${type}`;
+        statusDiv.textContent = message;
+        setTimeout(() => {
+            statusDiv.className = 'status-message';
+        }, 6000);
+    }
+
+    // ==========================================
+    // SELECT PAYMENT METHOD
+    // ==========================================
     function setMethod(method, btn) {
         selectedMethod = method;
         document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        
+        // Update method-specific UI
+        const numberInput = document.getElementById('wNumber');
+        if (method === 'bKash') {
+            numberInput.placeholder = 'Enter your bKash number (01XXXXXXXXX)';
+        } else if (method === 'Nagad') {
+            numberInput.placeholder = 'Enter your Nagad number (01XXXXXXXXX)';
+        } else if (method === 'Rocket') {
+            numberInput.placeholder = 'Enter your Rocket number (01XXXXXXXXX)';
+        }
     }
 
-    auth.onAuthStateChanged((user) => {
+    // ==========================================
+    // AUTH STATE CHECK
+    // ==========================================
+    auth.onAuthStateChanged(async (user) => {
         if (user) {
-            db.collection("users").doc(user.uid).onSnapshot((doc) => {
+            currentUser = user;
+            try {
+                const doc = await db.collection('users').doc(user.uid).get();
                 if (doc.exists) {
-                    document.getElementById('userBalance').innerText = "Balance: Tk." + doc.data().balance;
+                    userData = doc.data();
+                    updateBalanceDisplay(userData);
+                } else {
+                    window.location.href = 'index.html';
                 }
-            });
+            } catch (error) {
+                console.error('Error loading user data:', error);
+                showStatus('Error loading data. Please refresh.', 'error');
+            }
         } else {
-            window.location.href = "index.html";
+            showStatus('Please login first!', 'error');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
         }
     });
 
-    async function requestWithdraw() {
-        if (!selectedMethod) { alert("Please select a method!"); return; }
-        const amount = parseFloat(document.getElementById('wAmount').value);
-        const number = document.getElementById('wNumber').value;
-        const user = auth.currentUser;
+    // ==========================================
+    // UPDATE BALANCE DISPLAY
+    // ==========================================
+    function updateBalanceDisplay(data) {
+        const mainBalance = data.balance || 0;
+        const earnBalance = data.earnBalance || 0;
+        const total = mainBalance + earnBalance;
 
-        if(!amount || !number) { alert("Please enter amount and number"); return; }
-        
-        await db.collection("withdraw_requests").add({
-            uid: user.uid,
-            method: selectedMethod,
-            amount: amount,
-            number: number,
-            status: "pending",
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        alert("Withdraw Request Submitted Successfully!");
-        document.getElementById('wAmount').value = '';
-        document.getElementById('wNumber').value = '';
+        document.getElementById('userBalance').textContent = `৳${total}`;
+        document.getElementById('mainBalance').textContent = `৳${mainBalance}`;
+        document.getElementById('earnBalance').textContent = `৳${earnBalance}`;
     }
+
+    // ==========================================
+    // WITHDRAW FORM SUBMIT
+    // ==========================================
+    document.getElementById('withdrawForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        if (!currentUser) {
+            showStatus('Please login first!', 'error');
+            return;
+        }
+
+        if (!selectedMethod) {
+            showStatus('Please select a withdrawal method!', 'error');
+            return;
+        }
+
+        const amount = parseInt(document.getElementById('wAmount').value);
+        const number = document.getElementById('wNumber').value;
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Validation
+        if (!amount || amount < 500) {
+            showStatus('⚠️ Minimum withdrawal amount is ৳500!', 'error');
+            return;
+        }
+
+        if (!number || number.length < 11) {
+            showStatus('⚠️ Please enter a valid phone number!', 'error');
+            return;
+        }
+
+        const totalBalance = (userData.balance || 0) + (userData.earnBalance || 0);
+        if (amount > totalBalance) {
+            showStatus(`⚠️ Insufficient balance! Available: ৳${totalBalance}`, 'error');
+            return;
+        }
+
+        // Disable button and show loading
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="loading-spinner"></span> Processing...';
+
+        try {
+            // Check if user has pending withdrawal
+            const pendingQuery = await db.collection('withdrawals')
+                .where('userId', '==', currentUser.uid)
+                .where('status', '==', 'pending')
+                .get();
+
+            if (!pendingQuery.empty) {
+                showStatus('⚠️ You already have a pending withdrawal request!', 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Request Withdrawal';
+                return;
+            }
+
+            // Save withdrawal request
+            await db.collection('withdrawals').add({
+                userId: currentUser.uid,
+                userEmail: currentUser.email,
+                amount: amount,
+                method: selectedMethod,
+                account: number,
+                status: 'pending',
+                date: firebase.firestore.FieldValue.serverTimestamp(),
+                createdAt: new Date().toISOString()
+            });
+
+            // Deduct from balance (main first, then earn)
+            let remaining = amount;
+            if (userData.balance >= remaining) {
+                await db.collection('users').doc(currentUser.uid).update({
+                    balance: firebase.firestore.FieldValue.increment(-remaining)
+                });
+            } else {
+                const mainBalance = userData.balance;
+                const needFromEarn = remaining - mainBalance;
+                await db.collection('users').doc(currentUser.uid).update({
+                    balance: 0,
+                    earnBalance: firebase.firestore.FieldValue.increment(-needFromEarn)
+                });
+            }
+
+            // Show success
+            showStatus(`✅ Withdrawal request of ৳${amount} submitted successfully! 
+                       It will be processed within 24-48 hours.`, 'success');
+
+            // Reset form
+            document.getElementById('withdrawForm').reset();
+            document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+            selectedMethod = '';
+
+            // Update balance display
+            const updatedDoc = await db.collection('users').doc(currentUser.uid).get();
+            if (updatedDoc.exists) {
+                userData = updatedDoc.data();
+                updateBalanceDisplay(userData);
+            }
+
+        } catch (error) {
+            console.error('Error submitting withdrawal:', error);
+            showStatus('❌ Error: ' + error.message, 'error');
+        }
+
+        // Re-enable button
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Request Withdrawal';
+    });
+
+    // ==========================================
+    // AUTO-SELECT DEFAULT METHOD (bKash)
+    // ==========================================
+    window.onload = function() {
+        // Select bKash as default
+        const defaultBtn = document.querySelector('.method-btn.bKash');
+        if (defaultBtn) {
+            setMethod('bKash', defaultBtn);
+        }
+    };
 </script>
+
 </body>
 </html>
