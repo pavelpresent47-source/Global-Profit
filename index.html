@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forex Global | Investment Platform</title>
+    <title>Global Profit | Investment Platform</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -11,165 +11,242 @@
 
     <header>
         <div class="container navbar">
-            <div class="logo">Forex <span>Global</span></div>
+            <div class="logo">Global <span>Profit</span></div>
             <nav>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#about">About</a></li>
                     <li><a href="#plans">Plans</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#earn">Earn</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
             <div class="auth-buttons" id="authSection">
-                <button class="btn-login" style="background:transparent; border:none; color:white; margin-right:15px; cursor:pointer;" onclick="openModal('loginModal')">Login</button>
-                <button class="btn-register" style="background: linear-gradient(45deg, #0d6efd, #00f2fe); color: #fff; padding: 8px 20px; border-radius: 20px; border:none; font-weight: bold; cursor:pointer;" onclick="openModal('registerModal')">Register</button>
+                <button class="btn-login" onclick="openModal('loginModal')">Login</button>
+                <button class="btn-register" onclick="openModal('registerModal')">Register</button>
             </div>
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container hero-content">
-            <h5>WELCOME TO FOREX GLOBAL</h5>
-            <h1>A Profitable Platform For High-Margin Investment</h1>
-            <p>We work on making money from the volatility of cryptocurrencies and forex trading, offering great and secure returns to our global clients.</p>
+            <h5>WELCOME TO GLOBAL PROFIT</h5>
+            <h1>Start Earning With Just 200 Taka</h1>
+            <p>Invest, Refer, Watch Ads & Withdraw - Multiple ways to earn profit!</p>
             <div class="hero-btns">
-                <a href="#plans" class="btn-primary">Learn More</a>
-                <a href="https://wa.me/8801700000000" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Chat On WhatsApp</a>
+                <a href="#plans" class="btn-primary">Invest Now</a>
+                <a href="https://wa.me/01600787628" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Chat</a>
             </div>
         </div>
     </section>
 
+    <!-- Stats -->
     <section class="stats">
         <div class="container stats-grid">
             <div class="stat-box">
                 <i class="fas fa-users"></i>
-                <h3>5,100,000+</h3>
+                <h3 id="totalUsers">5,100,000+</h3>
                 <p>All Members</p>
             </div>
             <div class="stat-box">
                 <i class="fas fa-wallet"></i>
-                <h3>$49,800</h3>
-                <p>Average Investment</p>
+                <h3 id="totalInvest">$49,800</h3>
+                <p>Total Investment</p>
             </div>
             <div class="stat-box">
                 <i class="fas fa-globe"></i>
                 <h3>75+</h3>
-                <p>Countries Supported</p>
+                <p>Countries</p>
             </div>
         </div>
     </section>
 
-    <section id="about" class="about-section">
-        <div class="container about-grid">
-            <div class="about-text">
-                <h2>About Forex Global</h2>
-                <p>Forex Global is an investment company whose team is working on making money from the volatility of cryptocurrencies and forex markets. Our system ensures highly secure investments and automated daily profit returns.</p>
-                <div class="about-features">
-                    <p><i class="fas fa-shield-alt"></i> Secure & Reliable Infrastructure</p>
-                    <p><i class="fas fa-lock"></i> Guaranteed Protection of Capital</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- Investment Plans -->
     <section id="plans" class="plans">
         <div class="container">
             <div class="section-title">
                 <h2>Investment Plans</h2>
-                <p>Choose the investment plan that fits your strategy</p>
+                <p>Start from 200 Taka - Multiple plans for everyone!</p>
             </div>
             <div class="plans-grid">
                 <div class="plan-card">
-                    <h3>Global Trade Starter</h3>
-                    <div class="price">$100</div>
+                    <h3>Starter Plan</h3>
+                    <div class="price">৳200</div>
                     <ul>
-                        <li><i class="fas fa-check"></i> 1% Every Day (Mon - Fri)</li>
-                        <li><i class="fas fa-check"></i> Capital Return: Yes</li>
-                        <li><i class="fas fa-check"></i> Total 200% Return + Capital</li>
+                        <li><i class="fas fa-check"></i> 1% Daily Profit</li>
+                        <li><i class="fas fa-check"></i> 200% Return + Capital</li>
+                        <li><i class="fas fa-check"></i> 30 Days Duration</li>
                     </ul>
-                    <button class="btn-card" style="width:100%; cursor:pointer;" onclick="investPlan('Starter', 100)">Invest Now</button>
+                    <button class="btn-card" onclick="investPlan('Starter', 200)">Invest Now</button>
                 </div>
                 <div class="plan-card premium">
                     <div class="badge">Popular</div>
-                    <h3>Global Trade Pro</h3>
-                    <div class="price">$500</div>
+                    <h3>Pro Plan</h3>
+                    <div class="price">৳500</div>
                     <ul>
-                        <li><i class="fas fa-check"></i> 1.5% Every Day (Mon - Fri)</li>
-                        <li><i class="fas fa-check"></i> Capital Return: Yes</li>
-                        <li><i class="fas fa-check"></i> Total 200% Return + Capital</li>
+                        <li><i class="fas fa-check"></i> 1.5% Daily Profit</li>
+                        <li><i class="fas fa-check"></i> 200% Return + Capital</li>
+                        <li><i class="fas fa-check"></i> 30 Days Duration</li>
                     </ul>
-                    <button class="btn-card" style="width:100%; cursor:pointer;" onclick="investPlan('Pro', 500)">Invest Now</button>
+                    <button class="btn-card" onclick="investPlan('Pro', 500)">Invest Now</button>
                 </div>
                 <div class="plan-card">
-                    <h3>Global Agent</h3>
-                    <div class="price">$2000</div>
+                    <h3>Agent Plan</h3>
+                    <div class="price">৳2000</div>
                     <ul>
-                        <li><i class="fas fa-check"></i> 2% Every Day (Mon - Fri)</li>
-                        <li><i class="fas fa-check"></i> Capital Return: Yes</li>
-                        <li><i class="fas fa-check"></i> Total 200% Return + Capital</li>
+                        <li><i class="fas fa-check"></i> 2% Daily Profit</li>
+                        <li><i class="fas fa-check"></i> 200% Return + Capital</li>
+                        <li><i class="fas fa-check"></i> 30 Days Duration</li>
                     </ul>
-                    <button class="btn-card" style="width:100%; cursor:pointer;" onclick="investPlan('Agent', 2000)">Invest Now</button>
+                    <button class="btn-card" onclick="investPlan('Agent', 2000)">Invest Now</button>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Earn Section (Watch Ads) -->
+    <section id="earn" class="earn-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Watch Ads & Earn Money</h2>
+                <p>Watch short ads and earn up to 10 Taka daily!</p>
+            </div>
+            <div class="earn-grid" id="adContainer">
+                <div class="ad-card" onclick="watchAd('Ad 1', 2)">
+                    <i class="fas fa-play-circle"></i>
+                    <h4>Watch Ad & Earn ৳2</h4>
+                    <p>30 seconds video</p>
+                </div>
+                <div class="ad-card" onclick="watchAd('Ad 2', 2)">
+                    <i class="fas fa-play-circle"></i>
+                    <h4>Watch Ad & Earn ৳2</h4>
+                    <p>30 seconds video</p>
+                </div>
+                <div class="ad-card" onclick="watchAd('Ad 3', 3)">
+                    <i class="fas fa-play-circle"></i>
+                    <h4>Watch Ad & Earn ৳3</h4>
+                    <p>45 seconds video</p>
+                </div>
+                <div class="ad-card" onclick="watchAd('Ad 4', 3)">
+                    <i class="fas fa-play-circle"></i>
+                    <h4>Watch Ad & Earn ৳3</h4>
+                    <p>45 seconds video</p>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:20px;">
+                <p>Daily Limit: <span id="adCount">0</span>/20 Ads watched</p>
+                <p>Earn Balance: ৳<span id="earnBalance">0</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('loginModal')">&times;</span>
-            <h2 style="margin-bottom:20px; color:#00f2fe;">Login to Account</h2>
+            <h2>Login to Account</h2>
             <form id="loginForm">
-                <input type="email" id="loginEmail" placeholder="Email Address" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #0d6efd; background: #0b132b; color: white;">
-                <input type="password" id="loginPassword" placeholder="Password" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #0d6efd; background: #0b132b; color: white;">
-                <button type="submit" class="btn-primary" style="padding: 10px 25px; border-radius: 20px; border:none; font-weight:bold; cursor:pointer; background: linear-gradient(45deg, #0d6efd, #00f2fe); color:white; margin-top:10px;">Login</button>
+                <input type="email" id="loginEmail" placeholder="Email Address" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit" class="btn-primary">Login</button>
             </form>
         </div>
     </div>
 
+    <!-- Register Modal -->
     <div id="registerModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('registerModal')">&times;</span>
-            <h2 style="margin-bottom:20px; color:#00f2fe;">Create New Account</h2>
+            <h2>Create New Account</h2>
             <form id="registerForm">
-                <input type="text" id="regName" placeholder="Full Name" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #0d6efd; background: #0b132b; color: white;">
-                <input type="email" id="regEmail" placeholder="Email Address" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #0d6efd; background: #0b132b; color: white;">
-                <input type="password" id="regPassword" placeholder="Password (Min 6 characters)" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #0d6efd; background: #0b132b; color: white;">
-                <button type="submit" class="btn-primary" style="padding: 10px 25px; border-radius: 20px; border:none; font-weight:bold; cursor:pointer; background: linear-gradient(45deg, #0d6efd, #00f2fe); color:white; margin-top:10px;">Register</button>
+                <input type="text" id="regName" placeholder="Full Name" required>
+                <input type="email" id="regEmail" placeholder="Email Address" required>
+                <input type="password" id="regPassword" placeholder="Password (Min 6)" required>
+                <input type="text" id="regReferral" placeholder="Referral Code (Optional)">
+                <button type="submit" class="btn-primary">Register</button>
             </form>
         </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('depositModal')">&times;</span>
+            <h2>Deposit Money</h2>
+            <form id="depositForm">
+                <input type="number" id="depositAmount" placeholder="Amount (Min 200)" min="200" required>
+                <select id="depositMethod" required>
+                    <option value="">Select Payment Method</option>
+                    <option value="bKash">bKash</option>
+                    <option value="Nagad">Nagad</option>
+                    <option value="Rocket">Rocket</option>
+                </select>
+                <input type="text" id="depositTrx" placeholder="Transaction ID" required>
+                <button type="submit" class="btn-primary">Submit Deposit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Withdraw Modal -->
+    <div id="withdrawModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('withdrawModal')">&times;</span>
+            <h2>Withdraw Money</h2>
+            <form id="withdrawForm">
+                <input type="number" id="withdrawAmount" placeholder="Amount (Min 500)" min="500" required>
+                <select id="withdrawMethod" required>
+                    <option value="">Select Method</option>
+                    <option value="bKash">bKash</option>
+                    <option value="Nagad">Nagad</option>
+                    <option value="Rocket">Rocket</option>
+                </select>
+                <input type="text" id="withdrawAccount" placeholder="Account Number" required>
+                <button type="submit" class="btn-primary">Request Withdraw</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Link (Hidden until login) -->
+    <div id="dashboardLink" style="display:none; position:fixed; bottom:20px; right:20px; z-index:999;">
+        <button onclick="window.location.href='dashboard.html'" style="background:linear-gradient(45deg, #0d6efd, #00f2fe); color:white; padding:12px 25px; border:none; border-radius:30px; font-weight:bold; cursor:pointer; box-shadow:0 5px 15px rgba(13,110,253,0.4);">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+        </button>
     </div>
 
     <footer id="contact">
         <div class="container footer-content">
             <div class="footer-about">
-                <h3>Forex Global</h3>
-                <p>A full service investment platform providing reliable profits since inception.</p>
+                <h3>Global Profit</h3>
+                <p>Your trusted investment platform since 2026.</p>
             </div>
             <div class="footer-links">
-                <h4>Useful Links</h4>
+                <h4>Quick Links</h4>
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#plans">Plan</a></li>
+                    <li><a href="#plans">Plans</a></li>
+                    <li><a href="#earn">Earn</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
-                <h4>Contact Us</h4>
-                <p><i class="fas fa-phone"></i> +44-20-4526-2356</p>
-                <p><i class="fas fa-envelope"></i> support@forexglobal.biz</p>
+                <h4>Contact</h4>
+                <p><i class="fas fa-phone"></i> +880-1700-000000</p>
+                <p><i class="fas fa-envelope"></i> support@globalprofit.com</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>Copyright &copy; 2026 Forex Global. All Rights Reserved. Created by Pavel.</p>
+            <p>Copyright &copy; 2026 Global Profit. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
 
     <script>
+        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyBKgUEN3eCEQIm07JejOr4kM0yOBEGGdR8",
             authDomain: "forexglobal-95dfc.firebaseapp.com",
@@ -183,58 +260,379 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
+        // Modal Functions
         function openModal(id) { document.getElementById(id).style.display = "block"; }
         function closeModal(id) { document.getElementById(id).style.display = "none"; }
 
-        document.getElementById('registerForm').addEventListener('submit', (e) => {
+        // Generate Referral Code
+        function generateReferralCode(name) {
+            const prefix = name.substring(0, 3).toUpperCase();
+            const random = Math.floor(1000 + Math.random() * 9000);
+            return `${prefix}${random}`;
+        }
+
+        // Register
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = document.getElementById('regName').value;
             const email = document.getElementById('regEmail').value;
             const password = document.getElementById('regPassword').value;
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    return db.collection("users").doc(userCredential.user.uid).set({
-                        fullName: name, email: email, balance: 0, plan: "None", uid: userCredential.user.uid
-                    });
-                })
-                .then(() => { alert("Account Created!"); closeModal('registerModal'); })
-                .catch((error) => { alert("Error: " + error.message); });
+            const referralCode = document.getElementById('regReferral').value;
+
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const uid = userCredential.user.uid;
+                const myRefCode = generateReferralCode(name);
+
+                // Create user document
+                await db.collection("users").doc(uid).set({
+                    fullName: name,
+                    email: email,
+                    balance: 0,
+                    earnBalance: 0,
+                    totalInvest: 0,
+                    plan: "None",
+                    referralCode: myRefCode,
+                    referredBy: referralCode || "",
+                    adCount: 0,
+                    lastAdDate: new Date().toDateString(),
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    uid: uid
+                });
+
+                // Give referral bonus if code exists
+                if (referralCode) {
+                    const referrerQuery = await db.collection("users").where("referralCode", "==", referralCode).get();
+                    if (!referrerQuery.empty) {
+                        const referrerDoc = referrerQuery.docs[0];
+                        const referrerData = referrerDoc.data();
+                        const bonus = 10; // 10 Taka bonus
+                        
+                        await db.collection("users").doc(referrerDoc.id).update({
+                            balance: firebase.firestore.FieldValue.increment(bonus)
+                        });
+
+                        // Log referral bonus
+                        await db.collection("referralBonuses").add({
+                            referrerId: referrerDoc.id,
+                            referredId: uid,
+                            amount: bonus,
+                            date: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+
+                        alert(`Referral bonus ৳${bonus} added to referrer!`);
+                    }
+                }
+
+                alert("Account Created Successfully!");
+                closeModal('registerModal');
+                location.reload();
+
+            } catch (error) {
+                alert("Error: " + error.message);
+            }
         });
 
+        // Login
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
+            
             auth.signInWithEmailAndPassword(email, password)
-                .then(() => { alert("Logged In!"); closeModal('loginModal'); })
-                .catch((error) => { alert("Error: " + error.message); });
+                .then(() => {
+                    alert("Logged In Successfully!");
+                    closeModal('loginModal');
+                    location.reload();
+                })
+                .catch((error) => {
+                    alert("Error: " + error.message);
+                });
         });
 
+        // Auth State Listener
         auth.onAuthStateChanged((user) => {
             const authSection = document.getElementById('authSection');
+            const dashboardLink = document.getElementById('dashboardLink');
+            
             if (user) {
                 db.collection("users").doc(user.uid).onSnapshot((doc) => {
                     if (doc.exists) {
-                        const userData = doc.data();
+                        const data = doc.data();
                         authSection.innerHTML = `
-                            <span style="margin-right:10px; color:#00f2fe; font-weight:bold;">Hi, ${userData.fullName} ($${userData.balance})</span>
-                            <button onclick="window.location.href='withdraw.html'" style="background:#ff4757; color:white; border:none; padding:5px 10px; border-radius:15px; cursor:pointer; font-weight:bold; margin-right:5px;">Withdraw</button>
-                            <button style="background:transparent; border:1px solid #ff4d4d; color:#ff4d4d; padding:5px 15px; border-radius:15px; cursor:pointer; font-weight:bold;" onclick="auth.signOut()">Logout</button>
+                            <span style="margin-right:10px; color:#00f2fe; font-weight:bold;">
+                                Hi, ${data.fullName} (৳${data.balance + data.earnBalance})
+                            </span>
+                            <button onclick="openModal('depositModal')" style="background:#00f2fe; color:#0b132b; border:none; padding:5px 12px; border-radius:15px; cursor:pointer; font-weight:bold; margin-right:5px;">
+                                <i class="fas fa-plus"></i> Deposit
+                            </button>
+                            <button onclick="openModal('withdrawModal')" style="background:#ff4757; color:white; border:none; padding:5px 12px; border-radius:15px; cursor:pointer; font-weight:bold; margin-right:5px;">
+                                <i class="fas fa-arrow-up"></i> Withdraw
+                            </button>
+                            <button onclick="shareReferral()" style="background:#2ed573; color:white; border:none; padding:5px 12px; border-radius:15px; cursor:pointer; font-weight:bold; margin-right:5px;">
+                                <i class="fas fa-share-alt"></i> Refer
+                            </button>
+                            <button onclick="auth.signOut()" style="background:transparent; border:1px solid #ff4d4d; color:#ff4d4d; padding:5px 15px; border-radius:15px; cursor:pointer; font-weight:bold;">
+                                Logout
+                            </button>
                         `;
+                        dashboardLink.style.display = "block";
+                        document.getElementById('earnBalance').innerText = data.earnBalance || 0;
                     }
                 });
             } else {
                 authSection.innerHTML = `
-                    <button class="btn-login" style="background:transparent; border:none; color:white; margin-right:15px; cursor:pointer;" onclick="openModal('loginModal')">Login</button>
-                    <button class="btn-register" style="background: linear-gradient(45deg, #0d6efd, #00f2fe); color: #fff; padding: 8px 20px; border-radius: 20px; border:none; font-weight: bold; cursor:pointer;" onclick="openModal('registerModal')">Register</button>
+                    <button class="btn-login" onclick="openModal('loginModal')">Login</button>
+                    <button class="btn-register" onclick="openModal('registerModal')">Register</button>
                 `;
+                dashboardLink.style.display = "none";
             }
         });
 
+        // Investment Plan
         function investPlan(planName, price) {
-            if (!auth.currentUser) { alert("Please Login First!"); openModal('loginModal'); }
-            else { window.location.href = "payment.html"; }
+            if (!auth.currentUser) {
+                alert("Please Login First!");
+                openModal('loginModal');
+                return;
+            }
+            
+            const user = auth.currentUser;
+            db.collection("users").doc(user.uid).get().then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    if (data.balance >= price) {
+                        if (confirm(`Are you sure you want to invest ৳${price} in ${planName} Plan?`)) {
+                            db.collection("users").doc(user.uid).update({
+                                balance: firebase.firestore.FieldValue.increment(-price),
+                                totalInvest: firebase.firestore.FieldValue.increment(price),
+                                plan: planName
+                            }).then(() => {
+                                // Log investment
+                                db.collection("investments").add({
+                                    userId: user.uid,
+                                    plan: planName,
+                                    amount: price,
+                                    date: firebase.firestore.FieldValue.serverTimestamp(),
+                                    status: "active"
+                                });
+                                alert("Investment Successful! Start earning daily profit.");
+                            });
+                        }
+                    } else {
+                        alert(`Insufficient balance! You need ৳${price}. Please deposit first.`);
+                        openModal('depositModal');
+                    }
+                }
+            });
         }
+
+        // Watch Ad Function
+        function watchAd(adName, amount) {
+            if (!auth.currentUser) {
+                alert("Please Login First!");
+                openModal('loginModal');
+                return;
+            }
+
+            const user = auth.currentUser;
+            const today = new Date().toDateString();
+
+            db.collection("users").doc(user.uid).get().then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    const lastAdDate = data.lastAdDate || "";
+                    let adCount = data.adCount || 0;
+
+                    // Reset daily limit if new day
+                    if (lastAdDate !== today) {
+                        adCount = 0;
+                    }
+
+                    if (adCount >= 20) {
+                        alert("Daily limit reached! Come back tomorrow.");
+                        return;
+                    }
+
+                    // Add earning
+                    db.collection("users").doc(user.uid).update({
+                        earnBalance: firebase.firestore.FieldValue.increment(amount),
+                        adCount: adCount + 1,
+                        lastAdDate: today
+                    }).then(() => {
+                        // Log ad view
+                        db.collection("adViews").add({
+                            userId: user.uid,
+                            adName: adName,
+                            amount: amount,
+                            date: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                        alert(`You earned ৳${amount} from watching ${adName}!`);
+                        document.getElementById('adCount').innerText = adCount + 1;
+                    });
+                }
+            });
+        }
+
+        // Deposit Request
+        document.getElementById('depositForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!auth.currentUser) {
+                alert("Please Login First!");
+                return;
+            }
+
+            const amount = parseInt(document.getElementById('depositAmount').value);
+            const method = document.getElementById('depositMethod').value;
+            const trxId = document.getElementById('depositTrx').value;
+
+            if (amount < 200) {
+                alert("Minimum deposit is ৳200!");
+                return;
+            }
+
+            try {
+                await db.collection("deposits").add({
+                    userId: auth.currentUser.uid,
+                    amount: amount,
+                    method: method,
+                    trxId: trxId,
+                    status: "pending",
+                    date: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                alert("Deposit request submitted! Wait for admin approval.");
+                closeModal('depositModal');
+                document.getElementById('depositForm').reset();
+
+                // Add to user balance (temporary - should be approved by admin)
+                await db.collection("users").doc(auth.currentUser.uid).update({
+                    balance: firebase.firestore.FieldValue.increment(amount)
+                });
+
+            } catch (error) {
+                alert("Error: " + error.message);
+            }
+        });
+
+        // Withdraw Request
+        document.getElementById('withdrawForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!auth.currentUser) {
+                alert("Please Login First!");
+                return;
+            }
+
+            const amount = parseInt(document.getElementById('withdrawAmount').value);
+            const method = document.getElementById('withdrawMethod').value;
+            const account = document.getElementById('withdrawAccount').value;
+
+            if (amount < 500) {
+                alert("Minimum withdrawal is ৳500!");
+                return;
+            }
+
+            const userDoc = await db.collection("users").doc(auth.currentUser.uid).get();
+            const userData = userDoc.data();
+            const totalBalance = (userData.balance || 0) + (userData.earnBalance || 0);
+
+            if (amount > totalBalance) {
+                alert("Insufficient balance!");
+                return;
+            }
+
+            try {
+                await db.collection("withdrawals").add({
+                    userId: auth.currentUser.uid,
+                    amount: amount,
+                    method: method,
+                    account: account,
+                    status: "pending",
+                    date: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                // Deduct from main balance first, then earn balance
+                let remaining = amount;
+                if (userData.balance >= remaining) {
+                    await db.collection("users").doc(auth.currentUser.uid).update({
+                        balance: firebase.firestore.FieldValue.increment(-remaining)
+                    });
+                } else {
+                    const mainBalance = userData.balance;
+                    const earnBalance = userData.earnBalance || 0;
+                    const needFromEarn = remaining - mainBalance;
+                    
+                    await db.collection("users").doc(auth.currentUser.uid).update({
+                        balance: 0,
+                        earnBalance: firebase.firestore.FieldValue.increment(-needFromEarn)
+                    });
+                }
+
+                alert("Withdrawal request submitted! Wait for admin approval.");
+                closeModal('withdrawModal');
+                document.getElementById('withdrawForm').reset();
+
+            } catch (error) {
+                alert("Error: " + error.message);
+            }
+        });
+
+        // Share Referral
+        function shareReferral() {
+            if (!auth.currentUser) {
+                alert("Please Login First!");
+                return;
+            }
+
+            db.collection("users").doc(auth.currentUser.uid).get().then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    const refCode = data.referralCode;
+                    const link = `${window.location.origin}/?ref=${refCode}`;
+                    
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'Join Global Profit',
+                            text: `Invest with Global Profit and earn daily profit! Use my referral code: ${refCode}`,
+                            url: link
+                        });
+                    } else {
+                        prompt("Share this referral link:", link);
+                    }
+                }
+            });
+        }
+
+        // Check for referral code in URL
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const ref = params.get('ref');
+            if (ref) {
+                document.getElementById('regReferral').value = ref;
+                openModal('registerModal');
+            }
+
+            // Update ad count
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    db.collection("users").doc(user.uid).onSnapshot((doc) => {
+                        if (doc.exists) {
+                            const data = doc.data();
+                            document.getElementById('adCount').innerText = data.adCount || 0;
+                            document.getElementById('earnBalance').innerText = data.earnBalance || 0;
+                        }
+                    });
+                }
+            });
+        };
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        };
     </script>
+
 </body>
 </html>
