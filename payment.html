@@ -546,7 +546,9 @@
 <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
 
 <script>
-    // Firebase Config
+    // ==========================================
+    // FIREBASE CONFIG
+    // ==========================================
     const firebaseConfig = {
         apiKey: "AIzaSyBKgUEN3eCEQIm07JejOr4kM0yOBEGGdR8",
         authDomain: "forexglobal-95dfc.firebaseapp.com",
@@ -673,7 +675,7 @@
     });
 
     // ==========================================
-    // DEPOSIT FORM SUBMIT
+    // DEPOSIT FORM SUBMIT - COMPLETE FIX
     // ==========================================
     document.getElementById('depositForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -721,18 +723,29 @@
                 return;
             }
 
-            // Save deposit request to Firestore
+            // ==========================================
+            // IMPORTANT: Save deposit with userId
+            // ==========================================
             await db.collection('deposits').add({
-                userId: currentUser.uid,
+                userId: currentUser.uid,          // 🔴 এইটা গুরুত্বপূর্ণ!
+                uid: currentUser.uid,             // 🔴 ব্যাকআপ জন্য
                 userEmail: currentUser.email,
+                userName: currentUser.displayName || 'User',
                 amount: amount,
                 method: selectedMethod,
                 senderNumber: senderNumber,
                 trxId: transactionId,
-                status: 'pending',
+                status: 'pending',                 // 🔴 এইটা গুরুত্বপূর্ণ!
                 date: firebase.firestore.FieldValue.serverTimestamp(),
                 createdAt: new Date().toISOString()
             });
+
+            // Log success
+            console.log('✅ Deposit saved successfully!');
+            console.log('User ID:', currentUser.uid);
+            console.log('Amount:', amount);
+            console.log('Method:', selectedMethod);
+            console.log('Transaction ID:', transactionId);
 
             // Show success message
             showStatus(`✅ Deposit request of ৳${amount} submitted successfully! Your account will be updated within 24 hours after admin approval.`, 'success');
@@ -748,8 +761,15 @@
                 document.getElementById('currentBalance').textContent = (data.balance || 0) + (data.earnBalance || 0);
             }
 
+            // Show deposit details in console for debugging
+            console.log('📊 Deposit Details:');
+            console.log('- User ID:', currentUser.uid);
+            console.log('- Amount:', amount);
+            console.log('- Method:', selectedMethod);
+            console.log('- Status: pending');
+
         } catch (error) {
-            console.error("Error submitting deposit:", error);
+            console.error('❌ Error submitting deposit:', error);
             showStatus('❌ Error: ' + error.message, 'error');
         }
 
@@ -777,6 +797,10 @@
                 }, 2000);
             }
         });
+
+        console.log('📱 Payment page loaded successfully!');
+        console.log('Firebase Firestore initialized:', db);
+        console.log('Auth initialized:', auth);
     };
 </script>
 
